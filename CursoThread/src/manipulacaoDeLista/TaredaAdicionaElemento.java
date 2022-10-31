@@ -1,11 +1,13 @@
 package manipulacaoDeLista;
 
+import java.util.List;
+
 public class TaredaAdicionaElemento implements  Runnable{
 
-    private Lista lista;
+    private List<String> lista;
     private int numeroThread;
 
-    public TaredaAdicionaElemento(Lista lista, int numeroThread){
+    public TaredaAdicionaElemento(List<String> lista, int numeroThread){
         this.lista = lista;
         this.numeroThread = numeroThread;
     }
@@ -14,7 +16,7 @@ public class TaredaAdicionaElemento implements  Runnable{
     public void run() {
 
         for (int i =0 ; i <10; i++){
-            lista.adicionaElementos(" Thread " + numeroThread + " - " + i);
+            lista.add(" Thread " + numeroThread + " - " + i);
         }
     }
 }
