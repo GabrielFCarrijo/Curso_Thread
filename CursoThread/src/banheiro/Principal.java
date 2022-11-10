@@ -7,7 +7,9 @@ public class Principal {
         Banheiro banheiro = new Banheiro();
         Thread conviade1 = new Thread(new TarefaNumero1(banheiro), "Nico");
         Thread conviade2 = new Thread(new TarefaNumero2(banheiro), "Gabriel");
+        Thread limpeza = new Thread(new TarefaLimpeza(banheiro), "Limpeza");
 
+        limpeza.start();
         conviade1.start();
         conviade2.start();
     }
