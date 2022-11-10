@@ -12,10 +12,11 @@ public class Banheiro {
         synchronized (this) {
             System.out.println("Entro");
 
-            if (banheiroSujo) {
+            while (banheiroSujo) {
                 esperaLaFora(nome);
             }
 
+            this.banheiroSujo= true;
             System.out.println(nome + " Fez pips");
             System.out.println("Saiu");
         }
@@ -31,7 +32,7 @@ public class Banheiro {
 
             System.out.println(nome + " entrando no banheiro");
 
-            if (!this.banheiroSujo) {
+            while (!this.banheiroSujo) {
                 System.out.println(nome + ", não está sujo, vou sair");
                 return;
             }
@@ -46,14 +47,14 @@ public class Banheiro {
             }
 
 
+            this.notifyAll();
             System.out.println(nome + " saindo do banheiro");
         }
-        this.notifyAll();
     }
 
 
     private void esperaLaFora(String nome) {
-        System.out.println(nome + "eca, banheiro sujo");
+        System.out.println(nome + " eca, banheiro sujo");
 
         try {
             this.wait();
@@ -80,6 +81,7 @@ public class Banheiro {
                 e.printStackTrace();
             }
 
+            this.banheiroSujo= true;
             System.out.println(nome + " Fez submarino");
             System.out.println("Saiu");
         }
